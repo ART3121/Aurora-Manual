@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aurora IDE Manual</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=Source+Code+Pro:wght@400;600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <style>
+    :root {
+      --bg:        #fdfaf5;
+      --bg-aside:  #f4f0e8;
+      --border:    #c8bfa8;
+      --text:      #1a1612;
+      --text-muted:#6b6050;
+      --accent:    #7b3fa0;
+      --link:      #5a2d82;
+      --link-hover:#9b5fc0;
+      --nav-active:#c49de0;
+    }
+
+    body[data-theme="dark"] {
+      --bg:         #13100e;
+      --bg-aside:   #1c1814;
+      --border:     #3a3028;
+      --text:       #e8e0d4;
+      --text-muted: #8a8070;
+      --accent:     #c49de0;
+      --link:       #c49de0;
+      --link-hover: #e0b0ff;
+      --nav-active: #c49de0;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Source Serif 4', Georgia, serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 48px;
+      border-bottom: 1px solid var(--border);
+      font-family: 'Source Sans 3', sans-serif;
+    }
+
+    .topbar-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .topbar-logo svg { width: 28px; height: 28px; flex-shrink: 0; }
+    .topbar-logo-title { font-size: 13.5px; font-weight: 600; }
+    .topbar-logo-sub { font-size: 10.5px; color: var(--text-muted); }
+
+    .topbar-controls { display: flex; align-items: center; gap: 4px; }
+
+    .ctrl-btn {
+      padding: 5px 9px;
+      border-radius: 4px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-muted);
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 11.5px; font-weight: 600; letter-spacing: 0.04em;
+      cursor: pointer; transition: all 0.15s;
+    }
+    .ctrl-btn:hover { color: var(--text); }
+    .ctrl-btn.active { color: var(--accent); border-color: var(--border); }
+
+    .ctrl-sep { width: 1px; height: 16px; background: var(--border); margin: 0 4px; }
+
+    .theme-toggle {
+      display: flex; align-items: center; gap: 7px;
+      padding: 5px 9px; border-radius: 4px;
+      border: 1px solid transparent; background: transparent;
+      color: var(--text-muted);
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 11.5px; font-weight: 600;
+      cursor: pointer; transition: all 0.15s;
+    }
+    .theme-toggle:hover { color: var(--text); }
+
+    .toggle-track {
+      width: 26px; height: 14px; border-radius: 7px;
+      background: var(--border); position: relative;
+      transition: background 0.2s; flex-shrink: 0;
+    }
+    .toggle-thumb {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--text-muted);
+      position: absolute; top: 2.5px; left: 2.5px;
+      transition: transform 0.2s, background 0.2s;
+    }
+    body[data-theme="dark"] .toggle-track { background: #5a3a80; }
+    body[data-theme="dark"] .toggle-thumb { background: var(--nav-active); transform: translateX(12px); }
+
+    .hero {
+      padding: 72px 48px 56px;
+      max-width: 860px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-deco {
+      position: absolute;
+      top: -20px; right: -20px;
+      width: 400px; height: 320px;
+      opacity: 0.28;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    body[data-theme="dark"] .hero-deco { opacity: 0.42; }
+
+    .hero-eyebrow {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 600; line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--text); margin-bottom: 20px;
+    }
+
+    .hero-sub {
+      font-size: 1.05rem; font-weight: 300; font-style: italic;
+      color: var(--text-muted); line-height: 1.7;
+      max-width: 520px; margin-bottom: 36px;
+    }
+
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 22px; background: var(--accent);
+      color: #fff;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.03em;
+      text-decoration: none; border-radius: 4px;
+      transition: background 0.15s, box-shadow 0.15s;
+    }
+    .hero-cta:hover {
+      background: var(--link-hover);
+      box-shadow: 0 4px 18px rgba(123,63,160,0.25);
+    }
+    .hero-cta svg { width: 13px; height: 13px; }
+
+    .hero-meta {
+      margin-top: 28px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 12px; color: var(--text-muted);
+      display: flex; gap: 6px; align-items: center;
+    }
+    .hero-meta .dot { opacity: 0.4; }
+
+    .divider {
+      height: 1px; background: var(--border);
+      max-width: 764px; margin: 0 auto;
+    }
+
+    .chapters {
+      padding: 48px 48px 80px;
+      max-width: 860px; margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 20px;
+    }
+
+    .chapter-list { display: flex; flex-direction: column; }
+
+    .chapter-row {
+      display: flex; align-items: baseline; gap: 16px;
+      padding: 16px 0; border-bottom: 1px solid var(--border);
+      text-decoration: none; color: var(--text); transition: color 0.15s;
+    }
+    .chapter-row:first-child { border-top: 1px solid var(--border); }
+    .chapter-row:hover { color: var(--link); }
+    .chapter-row:hover .ch-num { color: var(--accent); }
+    .chapter-row.unavailable { opacity: 0.35; pointer-events: none; }
+
+    .ch-num {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 11px; font-weight: 600;
+      color: var(--text-muted); width: 28px;
+      flex-shrink: 0; transition: color 0.15s; padding-top: 2px;
+    }
+
+    .ch-info { flex: 1; }
+
+    .ch-title { font-size: 0.98rem; font-weight: 600; margin-bottom: 2px; }
+
+    .ch-desc {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 12.5px; color: var(--text-muted);
+    }
+
+    .ch-badge {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--text-muted); border: 1px solid var(--border);
+      border-radius: 3px; padding: 2px 6px; flex-shrink: 0;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 20px 48px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 11.5px; color: var(--text-muted);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+
+    [data-lang] { display: none; }
+    body[data-active-lang="en"] [data-lang="en"] { display: revert; }
+    body[data-active-lang="pt"] [data-lang="pt"] { display: revert; }
+    body[data-active-lang="fr"] [data-lang="fr"] { display: revert; }
+    span[data-lang] { display: none; }
+    body[data-active-lang="en"] span[data-lang="en"] { display: inline; }
+    body[data-active-lang="pt"] span[data-lang="pt"] { display: inline; }
+    body[data-active-lang="fr"] span[data-lang="fr"] { display: inline; }
+
+    @media (max-width: 640px) {
+      .topbar { padding: 14px 20px; }
+      .hero { padding: 48px 20px 40px; }
+      .hero-deco { display: none; }
+      .chapters { padding: 36px 20px 60px; }
+      .divider { margin: 0 20px; }
+      footer { padding: 16px 20px; flex-direction: column; gap: 6px; }
+    }
+  </style>
+</head>
+<body data-active-lang="en">
+
+<header class="topbar">
+  <a class="topbar-logo" href="#">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="32" height="32"><path d="M79.5 47.6c-1.8.4-3.5.7-5.3.9v5c1.8-.2 3.5-.6 5.3-.9v-5z" style="fill:#c49de0;opacity:0.2">
+</path><path d="M79.5 47.6v5c3.4-.7 6.8-1.6 10.1-2.7v-5c-3.2 1.1-6.6 2-10.1 2.7z" style="fill:#3a1a5a;opacity:0.2">
+</path><path d="M79.5 57.7v-5c-1.8.4-3.5.7-5.3.9v3.5c.1.5.1 1 .1 1.5 1.8-.3 3.5-.6 5.2-.9z" style="fill:#c49de0;opacity:0.5">
+</path><path d="M79.5 57.7c3.5-.7 6.9-1.6 10.2-2.7v-5c-3.3 1.1-6.7 2-10.1 2.7v5z" style="fill:#3a1a5a;opacity:0.5">
+</path><path d="M50.4 79.4l-.3.6c.1-.3.2-.5.3-.6z" style="fill:#c49de0">
+</path><path d="M51 78.4c-.2.2-.3.5-.5.7.2-.2.3-.4.5-.7z" style="fill:#c49de0">
+</path><path d="M50 80.2c-.1.3-.2.5-.3.8 0-.3.2-.6.3-.8z" style="fill:#c49de0">
+</path><path d="M49.6 80.9c-.1.3-.2.5-.3.8.2-.2.2-.5.3-.8z" style="fill:#c49de0">
+</path><path d="M49.3 81.9c-.1.2-.1.4-.1.6 0-.2.1-.4.1-.6z" style="fill:#c49de0">
+</path><path d="M49.1 82.7c0 .3-.1.5-.1.8.1-.2.1-.5.1-.8z" style="fill:#c49de0">
+</path><path d="M53.6 75.6c-.2.1-.4.3-.5.5.1-.2.3-.3.5-.5z" style="fill:#c49de0">
+</path><path d="M54.5 74.9c-.2.2-.5.3-.7.5.2-.1.5-.3.7-.5z" style="fill:#c49de0">
+</path><path d="M51.5 77.7c-.2.2-.3.4-.4.6.1-.2.3-.4.4-.6z" style="fill:#c49de0">
+</path><path d="M52.2 77c-.2.2-.3.4-.5.6.1-.3.3-.5.5-.6z" style="fill:#c49de0">
+</path><path d="M52.3 76.8l.6-.6-.6.6z" style="fill:#c49de0">
+</path><path d="M54.5 74.9c-.2.2-.5.3-.7.5l-.2.2c-.2.1-.4.3-.5.5l-.2.2-.6.6-.1.1c-.2.2-.3.4-.5.6l-.2.2c-.2.2-.3.4-.4.6l-.1.1c-.2.2-.3.5-.5.7 0 .1-.1.1-.1.2l-.3.6c0 .1-.1.1-.1.2-.1.3-.2.5-.3.8-.1.3-.2.5-.3.8 0 .1 0 .1-.1.2-.1.2-.1.4-.1.6v.2c0 .3-.1.5-.1.8v.1c0 1.1.1 2.3.8 3.2.2.3.5.6.8.8.1.1.3.1.4.2.8.3 1.6.3 2.4.4.9.1 1.7.2 2.6.2 1.7.1 3.8-.1 5.6-.1.2 0 .1-17.2.1-17.2-2.6 1.1-5.1 2.2-7.3 3.7z" style="fill:#e0b0ff">
+</path><path d="M49.1 83.5c0-.3 0-.5.1-.8v-.2c0-.2.1-.4.1-.6 0-.1 0-.1.1-.2.1-.3.2-.5.3-.8.1-.3.2-.5.3-.8 0-.1.1-.1.1-.2l.3-.6c0-.1.1-.1.1-.2.1-.2.3-.5.5-.7l.1-.1c.1-.2.3-.4.4-.6l.2-.2c.2-.2.3-.4.5-.6l.1-.1.6-.6.2-.2.5-.5.2-.2c.2-.2.5-.4.7-.5 2.2-1.5 4.7-2.6 7.2-3.8V50.7c-4.3.1-8.5.7-12.6 1.5v31.3z" style="fill:#c49de0">
+</path><path d="M50.5 79.2c0 .1-.1.1-.1.2 0-.1.1-.2.1-.2z" style="fill:#c49de0">
+</path><path d="M49.1 83.7v-.1.1z" style="fill:#c49de0">
+</path><path d="M51.1 78.3l-.1.1s0-.1.1-.1z" style="fill:#c49de0">
+</path><path d="M53.8 75.4l-.2.2c.1 0 .1-.1.2-.2z" style="fill:#c49de0">
+</path><path d="M53.1 76.1l-.2.2c.1-.1.1-.2.2-.2z" style="fill:#c49de0">
+</path><path d="M51.7 77.5l-.2.2c.1 0 .1-.1.2-.2z" style="fill:#c49de0">
+</path><path d="M52.2 77l.1-.1c-.1 0-.1 0-.1.1z" style="fill:#c49de0">
+</path><path d="M49.2 82.5v0z" style="fill:#c49de0">
+</path><path d="M50.1 79.9c0 .1-.1.1-.1.2 0 0 0-.1.1-.2z" style="fill:#c49de0">
+</path><path d="M49.4 81.7c0 .1 0 .1-.1.2 0 0 .1-.1.1-.2z" style="fill:#c49de0">
+</path><path d="M49.6 80.9z" style="fill:#c49de0">
+</path><path d="M61.7 50.7v20.5c2.5-1.1 5-2.2 7.2-3.7 2.6-1.7 4.7-4.4 5.5-7.1.1-.3.2-.6.2-.9.1-.8.1-1.6 0-2.4-.2-.9-.5-1.7-1.1-2.5-2.4-3.3-7.4-4-11.8-3.9z" style="fill:#3a1a5a">
+</path><path d="M74.6 22.8v2.4c.1-.8.1-1.6 0-2.4z" style="fill:none;opacity:0.5">
+</path><path d="M74.6 17.8v2.4c.1-.9.1-1.7 0-2.4z" style="fill:none">
+</path><path d="M25.3 23.1v-5c-5.1.8-10.2 1.2-15.3.6v5c5.2.6 10.2.2 15.3-.6z" style="fill:#3a1a5a;opacity:0.2">
+</path><path d="M43.5 19.1v-5c-6.1 1.4-12.1 3-18.2 4v5c6.1-1 12.1-2.6 18.2-4z" style="fill:#5a2d82;opacity:0.2">
+</path><path d="M61.7 16.4v-5c-6.1.2-12.2 1.3-18.2 2.7v5c6-1.4 12.1-2.6 18.2-2.7z" style="fill:#7b3fa0;opacity:0.2">
+</path><path d="M73.5 15.3c-2.2-3.1-6.8-4-11-4h-.8v5h.8c4.2 0 8.8.9 11 4 .6.8.9 1.6 1.1 2.5v-5.1c-.2-.8-.5-1.6-1.1-2.4z" style="fill:#9b5fc0;opacity:0.2">
+</path><path d="M25.3 28.1v-5c-5.1.8-10.2 1.2-15.3.6v5c5.2.6 10.2.2 15.3-.6z" style="fill:#3a1a5a;opacity:0.5">
+</path><path d="M25.3 23.1v5c6.1-1 12.1-2.6 18.2-4v-5c-6.1 1.4-12.1 3-18.2 4z" style="fill:#5a2d82;opacity:0.5">
+</path><path d="M43.5 19.1v5c6-1.4 12-2.6 18.2-2.7v-5c-6.1.1-12.2 1.3-18.2 2.7z" style="fill:#7b3fa0;opacity:0.5">
+</path><path d="M62.5 16.4h-.8v5h.8c4.2 0 8.8.9 11 4 .6.8.9 1.6 1.1 2.5v-5.1c-.2-.9-.5-1.7-1.1-2.5-2.2-3.1-6.8-3.9-11-3.9z" style="fill:#9b5fc0;opacity:0.5">
+</path><path d="M74.6 30.2c.1-.8.1-1.6 0-2.4v2.4z" style="fill:none">
+</path><path d="M25.3 57.4V28.1c-5.1.8-10.2 1.2-15.3.6V58c5.2.6 10.2.2 15.3-.6z" style="fill:#3a1a5a">
+</path><path d="M25.3 28.1v29.2c6.1-1 12.1-2.6 18.2-4V24.1c-6.1 1.4-12.1 3-18.2 4z" style="fill:#5a2d82">
+</path><path d="M43.5 24.1v29.2c1.8-.4 3.7-.8 5.5-1.2 4.2-.8 8.4-1.4 12.6-1.5V21.4c-6 .2-12.1 1.3-18.1 2.7z" style="fill:#7b3fa0">
+</path><path d="M73.5 25.4c-2.2-3.1-6.8-4-11-4h-.8v29.2c4.4-.1 9.4.6 11.8 3.9.6.8.9 1.6 1.1 2.5V27.8c-.2-.8-.5-1.7-1.1-2.4z" style="fill:#9b5fc0">
+</path><path d="M74.6 58.6v.9c0-.3.1-.6 0-.9z" style="fill:#c49de0">
+</path><path d="M74.5 58.5c0 .3 0 .6-.1.9 0 .3-.1.6-.2.9-.8 2.7-2.9 5.3-5.4 7-2.2 1.5-4.7 2.6-7.1 3.7v17.4c4.3 0 8.6-.2 12.8-.8.3 0 .5-.1.8-.1 1.5-.2 3-.5 4.5-.8v-29c-1.9.2-3.6.6-5.3.8z" style="fill:#c49de0">
+</path><path d="M79.6 86.6c3.4-.7 6.8-1.6 10-2.7v-29c-3.3 1.1-6.6 2-10 2.7v29z" style="fill:#3a1a5a">
+</path>
+</svg>
+    <div>
+      <div class="topbar-logo-title">Aurora IDE Manual</div>
+      <div class="topbar-logo-sub">v4.27.10 · NIPSCERN / UFJF</div>
+    </div>
+  </a>
+
+  <div class="topbar-controls">
+    <button class="ctrl-btn active" onclick="setLang('en')" id="btn-en">EN</button>
+    <button class="ctrl-btn" onclick="setLang('pt')" id="btn-pt">PT</button>
+    <button class="ctrl-btn" onclick="setLang('fr')" id="btn-fr">FR</button>
+    <div class="ctrl-sep"></div>
+    <button class="theme-toggle" onclick="toggleTheme()">
+      <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      <span id="theme-label">Dark</span>
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+    <canvas id="hero-deco" class="hero-deco"></canvas>
+
+  <div class="hero-eyebrow">NIPSCERN · UFJF · CERN</div>
+
+  <h1>
+    <span data-lang="en">Aurora IDE<br>Manual</span>
+    <span data-lang="pt">Manual do<br>Aurora IDE</span>
+    <span data-lang="fr">Manuel<br>Aurora IDE</span>
+  </h1>
+
+  <p class="hero-sub">
+    <span data-lang="en">Reference documentation for the Aurora IDE and the SAPHO softcore processor ecosystem.</span>
+    <span data-lang="pt">Documentação de referência para o Aurora IDE e o ecossistema do processador softcore SAPHO.</span>
+    <span data-lang="fr">Documentation de référence pour Aurora IDE et l'écosystème du processeur softcore SAPHO.</span>
+  </p>
+
+  <a href="pages/chapter1.html" class="hero-cta">
+    <span data-lang="en">Start reading</span>
+    <span data-lang="pt">Começar a ler</span>
+    <span data-lang="fr">Commencer</span>
+    <svg viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2 6.5h9M7 2.5l4 4-4 4"/>
+    </svg>
+  </a>
+
+  <div class="hero-meta">
+    <span>v4.27.10</span><span class="dot">·</span>
+    <span>Windows</span><span class="dot">·</span>
+    <span>2026</span>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="chapters">
+  <div class="section-label">
+    <span data-lang="en">Contents</span>
+    <span data-lang="pt">Conteúdo</span>
+    <span data-lang="fr">Sommaire</span>
+  </div>
+
+  <div class="chapter-list">
+
+    <a href="pages/chapter1.html" class="chapter-row">
+      <div class="ch-num">1</div>
+      <div class="ch-info">
+        <div class="ch-title"><span data-lang="en">Introduction</span><span data-lang="pt">Introdução</span><span data-lang="fr">Introduction</span></div>
+        <div class="ch-desc"><span data-lang="en">Aurora IDE, the SAPHO ecosystem and the NIPSCERN toolchain</span><span data-lang="pt">O Aurora IDE, o ecossistema SAPHO e o toolchain NIPSCERN</span><span data-lang="fr">Aurora IDE, l'écosystème SAPHO et la chaîne d'outils NIPSCERN</span></div>
+      </div>
+    </a>
+
+    <div class="chapter-row unavailable">
+      <div class="ch-num">2</div>
+      <div class="ch-info">
+        <div class="ch-title"><span data-lang="en">Installation</span><span data-lang="pt">Instalação</span><span data-lang="fr">Installation</span></div>
+        <div class="ch-desc"><span data-lang="en">System requirements, downloading and first launch</span><span data-lang="pt">Requisitos de sistema, download e primeiro acesso</span><span data-lang="fr">Configuration requise, téléchargement et premier lancement</span></div>
+      </div>
+      <div class="ch-badge"><span data-lang="en">Soon</span><span data-lang="pt">Em breve</span><span data-lang="fr">Bientôt</span></div>
+    </div>
+
+    <div class="chapter-row unavailable">
+      <div class="ch-num">3</div>
+      <div class="ch-info">
+        <div class="ch-title"><span data-lang="en">The Interface</span><span data-lang="pt">A Interface</span><span data-lang="fr">L'interface</span></div>
+        <div class="ch-desc"><span data-lang="en">Layout, panels, editor and navigation</span><span data-lang="pt">Layout, painéis, editor e navegação</span><span data-lang="fr">Disposition, panneaux, éditeur et navigation</span></div>
+      </div>
+      <div class="ch-badge"><span data-lang="en">Soon</span><span data-lang="pt">Em breve</span><span data-lang="fr">Bientôt</span></div>
+    </div>
+
+    <div class="chapter-row unavailable">
+      <div class="ch-num">4</div>
+      <div class="ch-info">
+        <div class="ch-title">Processor Hub</div>
+        <div class="ch-desc"><span data-lang="en">Configuring processor parameters and architecture</span><span data-lang="pt">Configuração dos parâmetros e arquitetura do processador</span><span data-lang="fr">Configuration des paramètres et de l'architecture</span></div>
+      </div>
+      <div class="ch-badge"><span data-lang="en">Soon</span><span data-lang="pt">Em breve</span><span data-lang="fr">Bientôt</span></div>
+    </div>
+
+    <div class="chapter-row unavailable">
+      <div class="ch-num">5</div>
+      <div class="ch-info">
+        <div class="ch-title"><span data-lang="en">The C± Language</span><span data-lang="pt">A Linguagem C±</span><span data-lang="fr">Le langage C±</span></div>
+        <div class="ch-desc"><span data-lang="en">Types, operators, control flow and the standard library</span><span data-lang="pt">Tipos, operadores, fluxo de controle e biblioteca padrão</span><span data-lang="fr">Types, opérateurs, flux de contrôle et bibliothèque standard</span></div>
+      </div>
+      <div class="ch-badge"><span data-lang="en">Soon</span><span data-lang="pt">Em breve</span><span data-lang="fr">Bientôt</span></div>
+    </div>
+
+    <div class="chapter-row unavailable">
+      <div class="ch-num">6</div>
+      <div class="ch-info">
+        <div class="ch-title"><span data-lang="en">Compilation</span><span data-lang="pt">Compilação</span><span data-lang="fr">Compilation</span></div>
+        <div class="ch-desc"><span data-lang="en">Full Build, individual stages and common errors</span><span data-lang="pt">Full Build, estágios individuais e erros comuns</span><span data-lang="fr">Full Build, étapes individuelles et erreurs courantes</span></div>
+      </div>
+      <div class="ch-badge"><span data-lang="en">Soon</span><span data-lang="pt">Em breve</span><span data-lang="fr">Bientôt</span></div>
+    </div>
+
+    <div class="chapter-row unavailable">
+      <div class="ch-num">7</div>
+      <div class="ch-info">
+        <div class="ch-title"><span data-lang="en">Simulation</span><span data-lang="pt">Simulação</span><span data-lang="fr">Simulation</span></div>
+        <div class="ch-desc"><span data-lang="en">GTKWave integration, waveform reading and timing analysis</span><span data-lang="pt">GTKWave, leitura de formas de onda e análise de timing</span><span data-lang="fr">Intégration GTKWave et analyse temporelle</span></div>
+      </div>
+      <div class="ch-badge"><span data-lang="en">Soon</span><span data-lang="pt">Em breve</span><span data-lang="fr">Bientôt</span></div>
+    </div>
+
+    <div class="chapter-row unavailable">
+      <div class="ch-num">8</div>
+      <div class="ch-info">
+        <div class="ch-title">RTL Viewer</div>
+        <div class="ch-desc"><span data-lang="en">Inspecting the synthesized architecture with PRISM</span><span data-lang="pt">Inspecionando a arquitetura sintetizada com o PRISM</span><span data-lang="fr">Inspection de l'architecture synthétisée avec PRISM</span></div>
+      </div>
+      <div class="ch-badge"><span data-lang="en">Soon</span><span data-lang="pt">Em breve</span><span data-lang="fr">Bientôt</span></div>
+    </div>
+
+    <div class="chapter-row unavailable">
+      <div class="ch-num">9</div>
+      <div class="ch-info">
+        <div class="ch-title">Project Mode</div>
+        <div class="ch-desc"><span data-lang="en">Multi-processor systems, top-level Verilog and testbenches</span><span data-lang="pt">Sistemas multi-processador, top-level Verilog e testbenches</span><span data-lang="fr">Systèmes multi-processeurs et bancs de test</span></div>
+      </div>
+      <div class="ch-badge"><span data-lang="en">Soon</span><span data-lang="pt">Em breve</span><span data-lang="fr">Bientôt</span></div>
+    </div>
+
+    <div class="chapter-row unavailable">
+      <div class="ch-num">10</div>
+      <div class="ch-info">
+        <div class="ch-title"><span data-lang="en">Troubleshooting</span><span data-lang="pt">Solução de Problemas</span><span data-lang="fr">Dépannage</span></div>
+        <div class="ch-desc"><span data-lang="en">Common issues, error messages and diagnostics</span><span data-lang="pt">Problemas comuns, mensagens de erro e diagnósticos</span><span data-lang="fr">Problèmes courants, messages d'erreur et diagnostics</span></div>
+      </div>
+      <div class="ch-badge"><span data-lang="en">Soon</span><span data-lang="pt">Em breve</span><span data-lang="fr">Bientôt</span></div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <span>NIPSCERN Laboratory · Universidade Federal de Juiz de Fora · CERN</span>
+  <span>Aurora IDE v4.27.10</span>
+</footer>
+
+<script>
+  // aurora wave animation
+  (function() {
+    const canvas = document.getElementById('hero-deco');
+    const ctx = canvas.getContext('2d');
+    let t = 0;
+
+    function resize() {
+      canvas.width  = canvas.offsetWidth  * window.devicePixelRatio;
+      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    const bands = [
+      { r:123, g:63,  b:160, speed: 0.000035, amp: 38, yFrac: 0.62, width: 1.8 },
+      { r:196, g:157, b:224, speed: 0.000022, amp: 28, yFrac: 0.52, width: 1.3 },
+      { r:155, g:95,  b:192, speed: 0.000016, amp: 20, yFrac: 0.43, width: 0.9 },
+    ];
+
+    function draw() {
+      const W = canvas.offsetWidth;
+      const H = canvas.offsetHeight;
+      ctx.clearRect(0, 0, W, H);
+      t++;
+
+      bands.forEach((b, i) => {
+        ctx.save();
+
+        // fade mask: transparent on left edge, full in middle, transparent on right edge
+        const fade = ctx.createLinearGradient(0, 0, W, 0);
+        fade.addColorStop(0,    'rgba(0,0,0,0)');
+        fade.addColorStop(0.12, 'rgba(0,0,0,1)');
+        fade.addColorStop(0.82, 'rgba(0,0,0,1)');
+        fade.addColorStop(1,    'rgba(0,0,0,0)');
+        ctx.globalCompositeOperation = 'source-over';
+
+        ctx.beginPath();
+        const steps = 100;
+        for (let s = 0; s <= steps; s++) {
+          const x = (s / steps) * W;
+          const wave = Math.sin(s * 0.07 + t * b.speed * 1000 + i * 1.3) * b.amp
+                     + Math.sin(s * 0.13 + t * b.speed * 600  + i * 0.7) * b.amp * 0.4;
+          const y = b.yFrac * H + wave;
+          s === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+
+        // apply fade by using a gradient stroke via temporary canvas
+        const tmp = document.createElement('canvas');
+        tmp.width  = canvas.width;
+        tmp.height = canvas.height;
+        const tctx = tmp.getContext('2d');
+        tctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+        tctx.beginPath();
+        for (let s = 0; s <= steps; s++) {
+          const x = (s / steps) * W;
+          const wave = Math.sin(s * 0.07 + t * b.speed * 1000 + i * 1.3) * b.amp
+                     + Math.sin(s * 0.13 + t * b.speed * 600  + i * 0.7) * b.amp * 0.4;
+          const y = b.yFrac * H + wave;
+          s === 0 ? tctx.moveTo(x, y) : tctx.lineTo(x, y);
+        }
+        tctx.strokeStyle = `rgb(${b.r},${b.g},${b.b})`;
+        tctx.lineWidth = b.width;
+        tctx.stroke();
+
+        // mask it with fade gradient
+        tctx.globalCompositeOperation = 'destination-in';
+        tctx.fillStyle = fade;
+        tctx.fillRect(0, 0, W, H);
+
+        ctx.drawImage(tmp, 0, 0, W * window.devicePixelRatio, H * window.devicePixelRatio, 0, 0, W, H);
+        ctx.restore();
+      });
+
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+
+  const themeLabels = {
+    en: { light: 'Dark', dark: 'Light' },
+    pt: { light: 'Escuro', dark: 'Claro' },
+    fr: { light: 'Sombre', dark: 'Clair' }
+  };
+
+  function toggleTheme() {
+    const t = document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.body.setAttribute('data-theme', t);
+    const lang = document.body.getAttribute('data-active-lang') || 'en';
+    document.getElementById('theme-label').textContent = themeLabels[lang][t];
+    try { localStorage.setItem('aurora-manual-theme', t); } catch(e) {}
+  }
+
+  function setLang(lang) {
+    document.body.setAttribute('data-active-lang', lang);
+    document.documentElement.setAttribute('lang', lang);
+    ['en','pt','fr'].forEach(l => {
+      document.getElementById('btn-' + l).classList.toggle('active', l === lang);
+    });
+    const t = document.body.getAttribute('data-theme') || 'light';
+    document.getElementById('theme-label').textContent = themeLabels[lang][t];
+    try { localStorage.setItem('aurora-manual-lang', lang); } catch(e) {}
+  }
+
+  (function() {
+    try {
+      const lang = localStorage.getItem('aurora-manual-lang');
+      const theme = localStorage.getItem('aurora-manual-theme');
+      if (lang && ['en','pt','fr'].includes(lang)) {
+        document.body.setAttribute('data-active-lang', lang);
+        document.documentElement.setAttribute('lang', lang);
+        ['en','pt','fr'].forEach(l => {
+          const b = document.getElementById('btn-' + l);
+          if (b) b.classList.toggle('active', l === lang);
+        });
+      }
+      if (theme && ['light','dark'].includes(theme)) {
+        document.body.setAttribute('data-theme', theme);
+        const activeLang = (lang && ['en','pt','fr'].includes(lang)) ? lang : 'en';
+        const label = document.getElementById('theme-label');
+        if (label) label.textContent = themeLabels[activeLang][theme];
+      }
+    } catch(e) {}
+  })();
+</script>
+</body>
+</html>

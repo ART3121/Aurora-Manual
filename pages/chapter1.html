@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aurora IDE Manual — Chapter 1: Introduction</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=Source+Code+Pro:wght@400;600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body data-active-lang="en">
+
+<nav>
+  <div class="nav-logo">
+   <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="32" height="32"><path d="M79.5 47.6c-1.8.4-3.5.7-5.3.9v5c1.8-.2 3.5-.6 5.3-.9v-5z" style="fill:#c49de0;opacity:0.2">
+</path><path d="M79.5 47.6v5c3.4-.7 6.8-1.6 10.1-2.7v-5c-3.2 1.1-6.6 2-10.1 2.7z" style="fill:#3a1a5a;opacity:0.2">
+</path><path d="M79.5 57.7v-5c-1.8.4-3.5.7-5.3.9v3.5c.1.5.1 1 .1 1.5 1.8-.3 3.5-.6 5.2-.9z" style="fill:#c49de0;opacity:0.5">
+</path><path d="M79.5 57.7c3.5-.7 6.9-1.6 10.2-2.7v-5c-3.3 1.1-6.7 2-10.1 2.7v5z" style="fill:#3a1a5a;opacity:0.5">
+</path><path d="M50.4 79.4l-.3.6c.1-.3.2-.5.3-.6z" style="fill:#c49de0">
+</path><path d="M51 78.4c-.2.2-.3.5-.5.7.2-.2.3-.4.5-.7z" style="fill:#c49de0">
+</path><path d="M50 80.2c-.1.3-.2.5-.3.8 0-.3.2-.6.3-.8z" style="fill:#c49de0">
+</path><path d="M49.6 80.9c-.1.3-.2.5-.3.8.2-.2.2-.5.3-.8z" style="fill:#c49de0">
+</path><path d="M49.3 81.9c-.1.2-.1.4-.1.6 0-.2.1-.4.1-.6z" style="fill:#c49de0">
+</path><path d="M49.1 82.7c0 .3-.1.5-.1.8.1-.2.1-.5.1-.8z" style="fill:#c49de0">
+</path><path d="M53.6 75.6c-.2.1-.4.3-.5.5.1-.2.3-.3.5-.5z" style="fill:#c49de0">
+</path><path d="M54.5 74.9c-.2.2-.5.3-.7.5.2-.1.5-.3.7-.5z" style="fill:#c49de0">
+</path><path d="M51.5 77.7c-.2.2-.3.4-.4.6.1-.2.3-.4.4-.6z" style="fill:#c49de0">
+</path><path d="M52.2 77c-.2.2-.3.4-.5.6.1-.3.3-.5.5-.6z" style="fill:#c49de0">
+</path><path d="M52.3 76.8l.6-.6-.6.6z" style="fill:#c49de0">
+</path><path d="M54.5 74.9c-.2.2-.5.3-.7.5l-.2.2c-.2.1-.4.3-.5.5l-.2.2-.6.6-.1.1c-.2.2-.3.4-.5.6l-.2.2c-.2.2-.3.4-.4.6l-.1.1c-.2.2-.3.5-.5.7 0 .1-.1.1-.1.2l-.3.6c0 .1-.1.1-.1.2-.1.3-.2.5-.3.8-.1.3-.2.5-.3.8 0 .1 0 .1-.1.2-.1.2-.1.4-.1.6v.2c0 .3-.1.5-.1.8v.1c0 1.1.1 2.3.8 3.2.2.3.5.6.8.8.1.1.3.1.4.2.8.3 1.6.3 2.4.4.9.1 1.7.2 2.6.2 1.7.1 3.8-.1 5.6-.1.2 0 .1-17.2.1-17.2-2.6 1.1-5.1 2.2-7.3 3.7z" style="fill:#e0b0ff">
+</path><path d="M49.1 83.5c0-.3 0-.5.1-.8v-.2c0-.2.1-.4.1-.6 0-.1 0-.1.1-.2.1-.3.2-.5.3-.8.1-.3.2-.5.3-.8 0-.1.1-.1.1-.2l.3-.6c0-.1.1-.1.1-.2.1-.2.3-.5.5-.7l.1-.1c.1-.2.3-.4.4-.6l.2-.2c.2-.2.3-.4.5-.6l.1-.1.6-.6.2-.2.5-.5.2-.2c.2-.2.5-.4.7-.5 2.2-1.5 4.7-2.6 7.2-3.8V50.7c-4.3.1-8.5.7-12.6 1.5v31.3z" style="fill:#c49de0">
+</path><path d="M50.5 79.2c0 .1-.1.1-.1.2 0-.1.1-.2.1-.2z" style="fill:#c49de0">
+</path><path d="M49.1 83.7v-.1.1z" style="fill:#c49de0">
+</path><path d="M51.1 78.3l-.1.1s0-.1.1-.1z" style="fill:#c49de0">
+</path><path d="M53.8 75.4l-.2.2c.1 0 .1-.1.2-.2z" style="fill:#c49de0">
+</path><path d="M53.1 76.1l-.2.2c.1-.1.1-.2.2-.2z" style="fill:#c49de0">
+</path><path d="M51.7 77.5l-.2.2c.1 0 .1-.1.2-.2z" style="fill:#c49de0">
+</path><path d="M52.2 77l.1-.1c-.1 0-.1 0-.1.1z" style="fill:#c49de0">
+</path><path d="M49.2 82.5v0z" style="fill:#c49de0">
+</path><path d="M50.1 79.9c0 .1-.1.1-.1.2 0 0 0-.1.1-.2z" style="fill:#c49de0">
+</path><path d="M49.4 81.7c0 .1 0 .1-.1.2 0 0 .1-.1.1-.2z" style="fill:#c49de0">
+</path><path d="M49.6 80.9z" style="fill:#c49de0">
+</path><path d="M61.7 50.7v20.5c2.5-1.1 5-2.2 7.2-3.7 2.6-1.7 4.7-4.4 5.5-7.1.1-.3.2-.6.2-.9.1-.8.1-1.6 0-2.4-.2-.9-.5-1.7-1.1-2.5-2.4-3.3-7.4-4-11.8-3.9z" style="fill:#3a1a5a">
+</path><path d="M74.6 22.8v2.4c.1-.8.1-1.6 0-2.4z" style="fill:none;opacity:0.5">
+</path><path d="M74.6 17.8v2.4c.1-.9.1-1.7 0-2.4z" style="fill:none">
+</path><path d="M25.3 23.1v-5c-5.1.8-10.2 1.2-15.3.6v5c5.2.6 10.2.2 15.3-.6z" style="fill:#3a1a5a;opacity:0.2">
+</path><path d="M43.5 19.1v-5c-6.1 1.4-12.1 3-18.2 4v5c6.1-1 12.1-2.6 18.2-4z" style="fill:#5a2d82;opacity:0.2">
+</path><path d="M61.7 16.4v-5c-6.1.2-12.2 1.3-18.2 2.7v5c6-1.4 12.1-2.6 18.2-2.7z" style="fill:#7b3fa0;opacity:0.2">
+</path><path d="M73.5 15.3c-2.2-3.1-6.8-4-11-4h-.8v5h.8c4.2 0 8.8.9 11 4 .6.8.9 1.6 1.1 2.5v-5.1c-.2-.8-.5-1.6-1.1-2.4z" style="fill:#9b5fc0;opacity:0.2">
+</path><path d="M25.3 28.1v-5c-5.1.8-10.2 1.2-15.3.6v5c5.2.6 10.2.2 15.3-.6z" style="fill:#3a1a5a;opacity:0.5">
+</path><path d="M25.3 23.1v5c6.1-1 12.1-2.6 18.2-4v-5c-6.1 1.4-12.1 3-18.2 4z" style="fill:#5a2d82;opacity:0.5">
+</path><path d="M43.5 19.1v5c6-1.4 12-2.6 18.2-2.7v-5c-6.1.1-12.2 1.3-18.2 2.7z" style="fill:#7b3fa0;opacity:0.5">
+</path><path d="M62.5 16.4h-.8v5h.8c4.2 0 8.8.9 11 4 .6.8.9 1.6 1.1 2.5v-5.1c-.2-.9-.5-1.7-1.1-2.5-2.2-3.1-6.8-3.9-11-3.9z" style="fill:#9b5fc0;opacity:0.5">
+</path><path d="M74.6 30.2c.1-.8.1-1.6 0-2.4v2.4z" style="fill:none">
+</path><path d="M25.3 57.4V28.1c-5.1.8-10.2 1.2-15.3.6V58c5.2.6 10.2.2 15.3-.6z" style="fill:#3a1a5a">
+</path><path d="M25.3 28.1v29.2c6.1-1 12.1-2.6 18.2-4V24.1c-6.1 1.4-12.1 3-18.2 4z" style="fill:#5a2d82">
+</path><path d="M43.5 24.1v29.2c1.8-.4 3.7-.8 5.5-1.2 4.2-.8 8.4-1.4 12.6-1.5V21.4c-6 .2-12.1 1.3-18.1 2.7z" style="fill:#7b3fa0">
+</path><path d="M73.5 25.4c-2.2-3.1-6.8-4-11-4h-.8v29.2c4.4-.1 9.4.6 11.8 3.9.6.8.9 1.6 1.1 2.5V27.8c-.2-.8-.5-1.7-1.1-2.4z" style="fill:#9b5fc0">
+</path><path d="M74.6 58.6v.9c0-.3.1-.6 0-.9z" style="fill:#c49de0">
+</path><path d="M74.5 58.5c0 .3 0 .6-.1.9 0 .3-.1.6-.2.9-.8 2.7-2.9 5.3-5.4 7-2.2 1.5-4.7 2.6-7.1 3.7v17.4c4.3 0 8.6-.2 12.8-.8.3 0 .5-.1.8-.1 1.5-.2 3-.5 4.5-.8v-29c-1.9.2-3.6.6-5.3.8z" style="fill:#c49de0">
+</path><path d="M79.6 86.6c3.4-.7 6.8-1.6 10-2.7v-29c-3.3 1.1-6.6 2-10 2.7v29z" style="fill:#3a1a5a">
+</path>
+</svg>
+    <div class="nav-logo-text">
+      <div class="nav-logo-title">Aurora IDE Manual</div>
+      <div class="nav-logo-sub">v4.27.10 · NIPSCERN / UFJF</div>
+    </div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title" data-lang="en">Chapters</div>
+    <div class="nav-section-title" data-lang="pt">Capítulos</div>
+    <div class="nav-section-title" data-lang="fr">Chapitres</div>
+
+    <a href="#" class="active">
+      <span class="num">1</span>
+      <span data-lang="en">Introduction</span><span data-lang="pt">Introdução</span><span data-lang="fr">Introduction</span>
+    </a>
+    <a href="#what-is-aurora" class="sub">
+      <span data-lang="en">1.1 What is Aurora IDE?</span>
+      <span data-lang="pt">1.1 O que é a Aurora IDE?</span>
+      <span data-lang="fr">1.1 Qu'est-ce qu'Aurora IDE ?</span>
+    </a>
+    <a href="#sapho-ecosystem" class="sub">
+      <span data-lang="en">1.2 The SAPHO Ecosystem</span>
+      <span data-lang="pt">1.2 O Ecossistema SAPHO</span>
+      <span data-lang="fr">1.2 L'écosystème SAPHO</span>
+    </a>
+    <a href="#toolchain" class="sub">
+      <span data-lang="en">1.3 Toolchain Overview</span>
+      <span data-lang="pt">1.3 Visão Geral do Toolchain</span>
+      <span data-lang="fr">1.3 Vue d'ensemble</span>
+    </a>
+    <a href="#project-structure" class="sub">
+      <span data-lang="en">1.4 Project Structure</span>
+      <span data-lang="pt">1.4 Estrutura do Projeto</span>
+      <span data-lang="fr">1.4 Structure du projet</span>
+    </a>
+  </div>
+
+  <div style="flex:1"></div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
+    <button class="lang-btn" onclick="setLang('pt')" id="btn-pt">PT</button>
+    <button class="lang-btn" onclick="setLang('fr')" id="btn-fr">FR</button>
+  </div>
+  <button class="theme-toggle" onclick="toggleTheme()">
+    <div class="toggle-track"><div class="toggle-thumb"></div></div>
+    <span id="theme-label">Dark mode</span>
+  </button>
+</nav>
+
+<main>
+
+  <div class="breadcrumb">
+    <a href="#"><span data-lang="en">Aurora IDE Manual</span><span data-lang="pt">Manual Aurora IDE</span><span data-lang="fr">Manuel Aurora IDE</span></a>
+    <span>›</span>
+    <span data-lang="en">Chapter 1: Introduction</span>
+    <span data-lang="pt">Capítulo 1: Introdução</span>
+    <span data-lang="fr">Chapitre 1 : Introduction</span>
+  </div>
+
+  <div class="chapter-eyebrow" data-lang="en">Chapter 1</div>
+  <div class="chapter-eyebrow" data-lang="pt">Capítulo 1</div>
+  <div class="chapter-eyebrow" data-lang="fr">Chapitre 1</div>
+
+  <h1>
+    <span data-lang="en">Introduction</span>
+    <span data-lang="pt">Introdução</span>
+    <span data-lang="fr">Introduction</span>
+  </h1>
+
+  <p class="chapter-subtitle" data-lang="en">Overview of the Aurora IDE, the SAPHO processor, and the NIPSCERN toolchain</p>
+  <p class="chapter-subtitle" data-lang="pt">Visão geral do Aurora IDE, do processador SAPHO e do toolchain NIPSCERN</p>
+  <p class="chapter-subtitle" data-lang="fr">Présentation d'Aurora IDE, du processeur SAPHO et de la chaîne d'outils NIPSCERN</p>
+
+  <div class="toc-box">
+    <div class="toc-box-title" data-lang="en">Contents of this chapter</div>
+    <div class="toc-box-title" data-lang="pt">Conteúdo deste capítulo</div>
+    <div class="toc-box-title" data-lang="fr">Contenu de ce chapitre</div>
+    <ol>
+      <li>
+        <a href="#what-is-aurora">
+          <span data-lang="en">What is Aurora IDE?</span>
+          <span data-lang="pt">O que é a Aurora IDE?</span>
+          <span data-lang="fr">Qu'est-ce qu'Aurora IDE ?</span>
+        </a>
+      </li>
+      <li>
+        <a href="#sapho-ecosystem">
+          <span data-lang="en">The SAPHO Ecosystem</span>
+          <span data-lang="pt">O Ecossistema SAPHO</span>
+          <span data-lang="fr">L'écosystème SAPHO</span>
+        </a>
+        <ol>
+          <li><a href="#what-is-sapho"><span data-lang="en">What is SAPHO?</span><span data-lang="pt">O que é o SAPHO?</span><span data-lang="fr">Qu'est-ce que SAPHO ?</span></a></li>
+          <li><a href="#cplus-language"><span data-lang="en">The C± Language</span><span data-lang="pt">A Linguagem C±</span><span data-lang="fr">Le langage C±</span></a></li>
+        </ol>
+      </li>
+      <li>
+        <a href="#toolchain">
+          <span data-lang="en">Toolchain Overview</span>
+          <span data-lang="pt">Visão Geral do Toolchain</span>
+          <span data-lang="fr">Vue d'ensemble de la chaîne d'outils</span>
+        </a>
+        <ol>
+          <li><a href="#compilation-pipeline"><span data-lang="en">The Compilation Pipeline</span><span data-lang="pt">O Pipeline de Compilação</span><span data-lang="fr">Le pipeline de compilation</span></a></li>
+          <li><a href="#components"><span data-lang="en">Toolchain Components</span><span data-lang="pt">Componentes do Toolchain</span><span data-lang="fr">Composants de la chaîne d'outils</span></a></li>
+        </ol>
+      </li>
+      <li>
+        <a href="#project-structure">
+          <span data-lang="en">Project Structure</span>
+          <span data-lang="pt">Estrutura do Projeto</span>
+          <span data-lang="fr">Structure du projet</span>
+        </a>
+      </li>
+    </ol>
+  </div>
+
+  <h2 id="what-is-aurora">
+    <span data-lang="en">1.1 What is Aurora IDE?</span>
+    <span data-lang="pt">1.1 O que é a Aurora IDE?</span>
+    <span data-lang="fr">1.1 Qu'est-ce qu'Aurora IDE ?</span>
+  </h2>
+
+  <p data-lang="en">
+    Aurora IDE is a graphical development environment for designing, compiling, simulating and visualizing SAPHO softcore processors. Developed and maintained by the NIPSCERN Laboratory at the Universidade Federal de Juiz de Fora (UFJF) in collaboration with CERN, Aurora serves as the primary interface between the designer and the SAPHO ecosystem, abstracting the full compilation pipeline from C± source code down to synthesizable Verilog HDL into a single integrated workflow.
+  </p>
+  <p data-lang="pt">
+    O Aurora IDE é um ambiente de desenvolvimento gráfico para projeto, compilação, simulação e visualização de processadores softcore SAPHO. Desenvolvido e mantido pelo Laboratório NIPSCERN da Universidade Federal de Juiz de Fora (UFJF) em colaboração com o CERN, o Aurora serve como interface principal entre o projetista e o ecossistema SAPHO, abstraindo o pipeline completo de compilação do código-fonte C± até o Verilog HDL sintetizável em um único fluxo de trabalho integrado.
+  </p>
+  <p data-lang="fr">
+    Aurora IDE est un environnement de développement graphique pour la conception, la compilation, la simulation et la visualisation de processeurs softcore SAPHO. Développé et maintenu par le Laboratoire NIPSCERN de l'Universidade Federal de Juiz de Fora (UFJF) en collaboration avec le CERN, Aurora sert d'interface principale entre le concepteur et l'écosystème SAPHO, abstrayant le pipeline de compilation complet du code source C± jusqu'au Verilog HDL synthétisable en un flux de travail intégré unique.
+  </p>
+
+  <p data-lang="en">
+    Rather than invoking compiler tools manually, the user interacts with Aurora through structured project management, a built-in code editor, and a Full Build command that orchestrates the entire toolchain automatically. Each compilation stage can also be triggered individually through its dedicated terminal. Simulation results are visualized directly within the environment through GTKWave integration, and the synthesized processor architecture can be inspected via the PRISM RTL Viewer.
+  </p>
+  <p data-lang="pt">
+    Em vez de invocar as ferramentas de compilação manualmente, o usuário interage com o Aurora por meio de gerenciamento estruturado de projetos, um editor de código integrado e um comando Full Build que orquestra todo o toolchain automaticamente. Cada estágio de compilação também pode ser disparado individualmente pelo seu terminal dedicado. Os resultados de simulação são visualizados diretamente no ambiente pela integração com o GTKWave, e a arquitetura sintetizada do processador pode ser inspecionada pelo PRISM RTL Viewer.
+  </p>
+  <p data-lang="fr">
+    Plutôt que d'invoquer manuellement les outils de compilation, l'utilisateur interagit avec Aurora via une gestion structurée de projets, un éditeur de code intégré et une commande Full Build qui orchestre automatiquement toute la chaîne d'outils. Chaque étape de compilation peut également être déclenchée individuellement via son terminal dédié. Les résultats de simulation sont visualisés directement dans l'environnement via l'intégration GTKWave, et l'architecture du processeur synthétisé peut être inspectée via le PRISM RTL Viewer.
+  </p>
+
+  <p data-lang="en">
+    Aurora is built with Electron and runs exclusively on Microsoft Windows. The current version covered by this manual is <code>v4.27.10</code>.
+  </p>
+  <p data-lang="pt">
+    O Aurora é construído com Electron e roda exclusivamente no Microsoft Windows. A versão coberta por este manual é a <code>v4.27.10</code>.
+  </p>
+  <p data-lang="fr">
+    Aurora est construite avec Electron et fonctionne exclusivement sur Microsoft Windows. La version couverte par ce manuel est la <code>v4.27.10</code>.
+  </p>
+
+
+  <h2 id="sapho-ecosystem">
+    <span data-lang="en">1.2 The SAPHO Ecosystem</span>
+    <span data-lang="pt">1.2 O Ecossistema SAPHO</span>
+    <span data-lang="fr">1.2 L'écosystème SAPHO</span>
+  </h2>
+
+  <h3 id="what-is-sapho">
+    <span data-lang="en">1.2.1 What is SAPHO?</span>
+    <span data-lang="pt">1.2.1 O que é o SAPHO?</span>
+    <span data-lang="fr">1.2.1 Qu'est-ce que SAPHO ?</span>
+  </h3>
+
+  <p data-lang="en">
+    SAPHO (<em>Scalable Architecture Processor for Hardware Optimization</em>) is a configurable softcore processor developed at NIPSCERN. It is based on a <strong>Harvard architecture</strong> with a <strong>three-stage pipeline</strong> (Fetch → Decode → Execute), capable of executing one instruction per clock cycle. Unlike a fixed processor, SAPHO's architecture is <em>synthesized</em> at design time: the user describes the processor's behavior in C± and the toolchain generates only the hardware blocks required by that specific program, leaving unused ALU operations, memory, and logic out of the synthesis.
+  </p>
+  <p data-lang="pt">
+    SAPHO (<em>Scalable Architecture Processor for Hardware Optimization</em>) é um processador softcore configurável desenvolvido no NIPSCERN. Baseia-se em uma <strong>arquitetura Harvard</strong> com <strong>pipeline de três estágios</strong> (Fetch → Decode → Execute), capaz de executar uma instrução por ciclo de clock. Ao contrário de um processador fixo, a arquitetura do SAPHO é <em>sintetizada</em> em tempo de projeto: o usuário descreve o comportamento do processador em C± e o toolchain gera apenas os blocos de hardware necessários para aquele programa específico, deixando operações de ULA, memória e lógica não utilizadas fora da síntese.
+  </p>
+  <p data-lang="fr">
+    SAPHO (<em>Scalable Architecture Processor for Hardware Optimization</em>) est un processeur softcore configurable développé au NIPSCERN. Il repose sur une <strong>architecture Harvard</strong> avec un <strong>pipeline à trois étages</strong> (Fetch → Decode → Execute), capable d'exécuter une instruction par cycle d'horloge. Contrairement à un processeur fixe, l'architecture de SAPHO est <em>synthétisée</em> au moment de la conception : l'utilisateur décrit le comportement du processeur en C± et la chaîne d'outils génère uniquement les blocs matériels requis par ce programme spécifique, laissant les opérations ALU, la mémoire et la logique inutilisées hors de la synthèse.
+  </p>
+
+  <p data-lang="en">
+    This means every project in Aurora produces a physically distinct processor, customized for its specific application. The SAPHO architecture is particularly suited for signal processing and hardware acceleration tasks, as its arithmetic datapath can be configured for integer, floating-point, and native complex number operations.
+  </p>
+  <p data-lang="pt">
+    Isso significa que cada projeto no Aurora produz um processador fisicamente distinto, customizado para sua aplicação específica. A arquitetura SAPHO é particularmente adequada para tarefas de processamento de sinais e aceleração de hardware, pois seu datapath aritmético pode ser configurado para operações com inteiros, ponto flutuante e números complexos nativos.
+  </p>
+  <p data-lang="fr">
+    Cela signifie que chaque projet dans Aurora produit un processeur physiquement distinct, personnalisé pour son application spécifique. L'architecture SAPHO est particulièrement adaptée aux tâches de traitement du signal et d'accélération matérielle, car son chemin de données arithmétique peut être configuré pour des opérations sur des entiers, des nombres en virgule flottante et des nombres complexes natifs.
+  </p>
+
+  <h3 id="cplus-language">
+    <span data-lang="en">1.2.2 The C± Language</span>
+    <span data-lang="pt">1.2.2 A Linguagem C±</span>
+    <span data-lang="fr">1.2.2 Le langage C±</span>
+  </h3>
+
+  <p data-lang="en">
+    Processor behavior in SAPHO is described using <strong>C±</strong> (pronounced "C plus-minus"), a domain-specific language developed by NIPSCERN. It is important to understand that C± does not <em>program</em> a processor in the traditional sense: it <em>describes the hardware behavior</em> that will be synthesized. When you write a C± program, you are defining what circuits the processor will contain, not writing instructions to run on existing hardware.
+  </p>
+  <p data-lang="pt">
+    O comportamento do processador no SAPHO é descrito usando <strong>C±</strong> (pronunciado "C mais-menos"), uma linguagem de domínio específico desenvolvida pelo NIPSCERN. É importante entender que o C± não <em>programa</em> um processador no sentido tradicional: ele <em>descreve o comportamento do hardware</em> que será sintetizado. Quando você escreve um programa C±, está definindo quais circuitos o processador vai conter, não escrevendo instruções para executar em hardware existente.
+  </p>
+  <p data-lang="fr">
+    Le comportement du processeur dans SAPHO est décrit en <strong>C±</strong> (prononcé "C plus-moins"), un langage dédié développé par NIPSCERN. Il est important de comprendre que C± ne <em>programme</em> pas un processeur au sens traditionnel: il <em>décrit le comportement matériel</em> qui sera synthétisé. Lorsque vous écrivez un programme C±, vous définissez quels circuits le processeur contiendra, et non des instructions à exécuter sur du matériel existant.
+  </p>
+
+  <p data-lang="en">
+    C± is syntactically close to a subset of standard C, making it approachable for students with prior programming experience. Beyond the standard <code>int</code> and <code>float</code> types, C± introduces a native <code>comp</code> type for complex number operations, a key differentiator of the SAPHO architecture that enables hardware-level arithmetic on complex numbers without any software overhead. The language also provides a standard library of hardware-synthesized functions including <code>abs()</code>, <code>fase()</code>, <code>sqrt()</code>, <code>sin()</code>, <code>cos()</code>, and others.
+  </p>
+  <p data-lang="pt">
+    O C± é sintaticamente próximo de um subconjunto do C padrão, tornando-o acessível para estudantes com experiência prévia em programação. Além dos tipos padrão <code>int</code> e <code>float</code>, o C± introduz o tipo nativo <code>comp</code> para operações com números complexos, um diferencial chave da arquitetura SAPHO que permite aritmética com complexos em nível de hardware sem nenhum overhead de software. A linguagem também fornece uma biblioteca padrão de funções sintetizadas em hardware, incluindo <code>abs()</code>, <code>fase()</code>, <code>sqrt()</code>, <code>sin()</code>, <code>cos()</code> e outras.
+  </p>
+  <p data-lang="fr">
+    C± est syntaxiquement proche d'un sous-ensemble du C standard, le rendant accessible aux étudiants ayant une expérience préalable en programmation. Au-delà des types standard <code>int</code> et <code>float</code>, C± introduit un type natif <code>comp</code> pour les opérations sur les nombres complexes, différenciateur clé de l'architecture SAPHO permettant l'arithmétique sur les complexes au niveau matériel sans aucune surcharge logicielle. Le langage fournit également une bibliothèque standard de fonctions synthétisées en matériel, dont <code>abs()</code>, <code>fase()</code>, <code>sqrt()</code>, <code>sin()</code>, <code>cos()</code> et d'autres.
+  </p>
+
+  <p data-lang="en">A minimal C± processor description follows this structure:</p>
+  <p data-lang="pt">Uma descrição mínima de processador em C± segue esta estrutura:</p>
+  <p data-lang="fr">Une description minimale de processeur en C± suit cette structure :</p>
+
+<pre><span class="comment">/* Processor configuration directives (generated by Processor Hub) */</span>
+<span class="directive">#PRNAME</span> procTest_00
+<span class="directive">#NUBITS</span> <span class="number">5</span>
+<span class="directive">#NDSTAC</span> <span class="number">5</span>
+<span class="directive">#SDEPTH</span> <span class="number">5</span>
+<span class="directive">#NUIOIN</span> <span class="number">1</span>
+<span class="directive">#NUIOOU</span> <span class="number">1</span>
+<span class="directive">#NBMANT</span> <span class="number">2</span>
+<span class="directive">#NBEXPO</span> <span class="number">2</span>
+<span class="directive">#NUGAIN</span> <span class="number">15</span>
+
+<span class="comment">/* Program entry point */</span>
+<span class="type">void</span> <span class="func">main</span>() {
+    <span class="type">int</span> a = <span class="number">1</span>;
+    <span class="type">int</span> b = <span class="number">2</span>;
+    <span class="type">int</span> c = a + b;
+    <span class="func">out</span>(<span class="number">0</span>, c);   <span class="comment">/* send value of c to output port 0 */</span>
+}</pre>
+
+  <p data-lang="en">
+    The block of <code>#DIRECTIVE</code> lines at the top of the file encodes the processor's architectural parameters. These are automatically generated by the <strong>Processor Hub</strong> (see <a href="#">Chapter 4</a>) and it is recommended to keep them in sync with the processor configuration rather than editing them directly. The <code>void main()</code> function is the program's entry point and contains the user's logic.
+  </p>
+  <p data-lang="pt">
+    O bloco de linhas <code>#DIRETIVA</code> no topo do arquivo codifica os parâmetros arquiteturais do processador. Esses valores são gerados automaticamente pelo <strong>Processor Hub</strong> (ver <a href="#">Capítulo 4</a>) e recomenda-se mantê-los sincronizados com a configuração do processador em vez de editá-los diretamente. A função <code>void main()</code> é o ponto de entrada do programa e contém a lógica do usuário.
+  </p>
+  <p data-lang="fr">
+    Le bloc de lignes <code>#DIRECTIVE</code> en haut du fichier encode les paramètres architecturaux du processeur. Ces valeurs sont générées automatiquement par le <strong>Processor Hub</strong> (voir <a href="#">Chapitre 4</a>) et il est recommandé de les maintenir synchronisées avec la configuration du processeur plutôt que de les modifier directement. La fonction <code>void main()</code> est le point d'entrée du programme et contient la logique de l'utilisateur.
+  </p>
+
+  <div class="warning">
+    <div class="warning-label" data-lang="en">Warning</div>
+    <div class="warning-label" data-lang="pt">Atenção</div>
+    <div class="warning-label" data-lang="fr">Avertissement</div>
+    <span data-lang="en">The configuration directives at the top of a <code>.cmm</code> file are tightly coupled to the processor instance defined in the Processor Hub. Editing these values manually without regenerating the processor may produce incorrect simulation results or synthesis errors.</span>
+    <span data-lang="pt">As diretivas de configuração no topo de um arquivo <code>.cmm</code> estão diretamente vinculadas à instância do processador definida no Processor Hub. Editar esses valores manualmente sem regenerar o processador pode produzir resultados de simulação incorretos ou erros de síntese.</span>
+    <span data-lang="fr">Les directives de configuration en haut d'un fichier <code>.cmm</code> sont étroitement liées à l'instance du processeur définie dans le Processor Hub. Modifier ces valeurs manuellement sans régénérer le processeur peut produire des résultats de simulation incorrects ou des erreurs de synthèse.</span>
+  </div>
+
+  <div class="note">
+    <div class="note-label" data-lang="en">Note</div>
+    <div class="note-label" data-lang="pt">Nota</div>
+    <div class="note-label" data-lang="fr">Remarque</div>
+    <span data-lang="en">Aurora operates in two distinct modes. In <strong>Processor Mode</strong>, you design, compile and simulate a single processor. In <strong>Project Mode</strong>, you connect multiple compiled processors together into a larger system, writing a custom Verilog top-level and testbench to orchestrate them. Project Mode is covered in detail in <a href="#">Chapter 9</a>.</span>
+    <span data-lang="pt">O Aurora opera em dois modos distintos. No <strong>Processor Mode</strong>, você projeta, compila e simula um único processador. No <strong>Project Mode</strong>, você conecta múltiplos processadores compilados em um sistema maior, escrevendo um top-level Verilog customizado e um testbench para orquestrá-los. O Project Mode é abordado em detalhes no <a href="#">Capítulo 9</a>.</span>
+    <span data-lang="fr">Aurora fonctionne en deux modes distincts. En <strong>Processor Mode</strong>, vous concevez, compilez et simulez un seul processeur. En <strong>Project Mode</strong>, vous connectez plusieurs processeurs compilés dans un système plus grand, en écrivant un top-level Verilog personnalisé et un banc de test pour les orchestrer. Le Project Mode est couvert en détail dans le <a href="#">Chapitre 9</a>.</span>
+  </div>
+
+  <h2 id="toolchain">
+    <span data-lang="en">1.3 Toolchain Overview</span>
+    <span data-lang="pt">1.3 Visão Geral do Toolchain</span>
+    <span data-lang="fr">1.3 Vue d'ensemble de la chaîne d'outils</span>
+  </h2>
+
+  <h3 id="compilation-pipeline">
+    <span data-lang="en">1.3.1 The Compilation Pipeline</span>
+    <span data-lang="pt">1.3.1 O Pipeline de Compilação</span>
+    <span data-lang="fr">1.3.1 Le pipeline de compilation</span>
+  </h3>
+
+  <p data-lang="en">
+    A Full Build in Aurora executes a multi-stage compilation pipeline. Each stage is handled by a dedicated component, and each has its own terminal tab within the Aurora IDE interface where its output can be inspected.
+  </p>
+  <p data-lang="pt">
+    Um Full Build no Aurora executa um pipeline de compilação em múltiplos estágios. Cada estágio é tratado por um componente dedicado, e cada um possui sua própria aba de terminal dentro da interface do Aurora IDE onde sua saída pode ser inspecionada.
+  </p>
+  <p data-lang="fr">
+    Un Full Build dans Aurora exécute un pipeline de compilation en plusieurs étapes. Chaque étape est gérée par un composant dédié, et chacune possède son propre onglet de terminal dans l'interface Aurora IDE où sa sortie peut être inspectée.
+  </p>
+
+  <div class="flow-diagram">
+
+    <div class="flow-step">
+      <div class="flow-arrow">
+        ●
+        <div class="flow-connector"></div>
+      </div>
+      <div class="flow-box">
+        <span class="flow-tag tag-cplus">C± Source</span>
+        <div><strong>procTest_00.cmm</strong></div>
+        <div class="flow-desc" data-lang="en">User-written program in the C± language</div>
+        <div class="flow-desc" data-lang="pt">Programa escrito pelo usuário em C±</div>
+        <div class="flow-desc" data-lang="fr">Programme écrit par l'utilisateur en C±</div>
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="flow-arrow">
+        ↓
+        <div class="flow-connector"></div>
+      </div>
+      <div class="flow-box">
+        <span class="flow-tag tag-cplus">TCMM Terminal</span>
+        <div><strong>C± Compiler (cmmcomp.exe)</strong> <span class="flow-tool">YANC</span></div>
+        <div class="flow-desc" data-lang="en">Translates C± source into SAPHO Assembly. Reports number of instructions generated.</div>
+        <div class="flow-desc" data-lang="pt">Traduz o código-fonte C± para Assembly SAPHO. Reporta o número de instruções geradas.</div>
+        <div class="flow-desc" data-lang="fr">Traduit le source C± en Assembly SAPHO. Indique le nombre d'instructions générées.</div>
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="flow-arrow">
+        ↓
+        <div class="flow-connector"></div>
+      </div>
+      <div class="flow-box">
+        <span class="flow-tag tag-asm">ASM Intermediate</span>
+        <div><strong>procTest_00.asm</strong></div>
+        <div class="flow-desc" data-lang="en">Assembly file generated in the <code>Software/</code> folder of the project</div>
+        <div class="flow-desc" data-lang="pt">Arquivo Assembly gerado na pasta <code>Software/</code> do projeto</div>
+        <div class="flow-desc" data-lang="fr">Fichier Assembly généré dans le dossier <code>Software/</code> du projet</div>
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="flow-arrow">
+        ↓
+        <div class="flow-connector"></div>
+      </div>
+      <div class="flow-box">
+        <span class="flow-tag tag-asm">TASM Terminal</span>
+        <div><strong>ASM Compiler (asmcomp.exe)</strong> <span class="flow-tool">YANC</span></div>
+        <div class="flow-desc" data-lang="en">Assembles instructions into HDL logic. Selects required ALU resources (e.g., integer adder). Generates and copies the simulation testbench.</div>
+        <div class="flow-desc" data-lang="pt">Monta as instruções em lógica HDL. Seleciona os recursos de ULA necessários (ex: somador inteiro). Gera e copia o testbench de simulação.</div>
+        <div class="flow-desc" data-lang="fr">Assemble les instructions en logique HDL. Sélectionne les ressources ALU nécessaires (ex : additionneur entier). Génère et copie le banc de test de simulation.</div>
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="flow-arrow">
+        ↓
+        <div class="flow-connector"></div>
+      </div>
+      <div class="flow-box">
+        <span class="flow-tag tag-hdl">Verilog HDL</span>
+        <div><strong>core.v, processor.v, ula.v, …</strong></div>
+        <div class="flow-desc" data-lang="en">Synthesizable Verilog files representing the complete SAPHO processor instance</div>
+        <div class="flow-desc" data-lang="pt">Arquivos Verilog sintetizáveis representando a instância completa do processador SAPHO</div>
+        <div class="flow-desc" data-lang="fr">Fichiers Verilog synthétisables représentant l'instance complète du processeur SAPHO</div>
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="flow-arrow">
+        ↓
+        <div class="flow-connector"></div>
+      </div>
+      <div class="flow-box">
+        <span class="flow-tag tag-hdl">TVERI Terminal</span>
+        <div><strong>Verilog Compiler + Yosys</strong></div>
+        <div class="flow-desc" data-lang="en">Compiles Verilog files and generates the RTL module hierarchy for the PRISM RTL Viewer.</div>
+        <div class="flow-desc" data-lang="pt">Compila os arquivos Verilog e gera a hierarquia de módulos RTL para o PRISM RTL Viewer.</div>
+        <div class="flow-desc" data-lang="fr">Compile les fichiers Verilog et génère la hiérarchie de modules RTL pour le PRISM RTL Viewer.</div>
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="flow-arrow">
+        ↓
+        <div class="flow-connector"></div>
+      </div>
+      <div class="flow-box">
+        <span class="flow-tag tag-sim">Simulation</span>
+        <div><strong>GTKWave Waveform Viewer</strong></div>
+        <div class="flow-desc" data-lang="en">Displays signal waveforms including clock, I/O, variables, Assembly instructions, and ALU state over simulation time.</div>
+        <div class="flow-desc" data-lang="pt">Exibe formas de onda de sinais incluindo clock, I/O, variáveis, instruções Assembly e estado da ULA ao longo do tempo de simulação.</div>
+        <div class="flow-desc" data-lang="fr">Affiche les formes d'onde des signaux incluant horloge, E/S, variables, instructions Assembly et état de l'ALU au cours du temps de simulation.</div>
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="flow-arrow">↓</div>
+      <div class="flow-box">
+        <span class="flow-tag tag-rtl">RTL Viewer</span>
+        <div><strong>PRISM RTL Viewer</strong></div>
+        <div class="flow-desc" data-lang="en">Renders the schematic diagram of the synthesized processor, showing all ports and internal modules.</div>
+        <div class="flow-desc" data-lang="pt">Renderiza o diagrama esquemático do processador sintetizado, mostrando todas as portas e módulos internos.</div>
+        <div class="flow-desc" data-lang="fr">Rend le schéma du processeur synthétisé, montrant tous les ports et modules internes.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <h3 id="components">
+    <span data-lang="en">1.3.2 Toolchain Components</span>
+    <span data-lang="pt">1.3.2 Componentes do Toolchain</span>
+    <span data-lang="fr">1.3.2 Composants de la chaîne d'outils</span>
+  </h3>
+
+  <p data-lang="en">The following table summarizes all components involved in an Aurora Full Build:</p>
+  <p data-lang="pt">A tabela a seguir resume todos os componentes envolvidos em um Full Build do Aurora:</p>
+  <p data-lang="fr">Le tableau suivant résume tous les composants impliqués dans un Full Build Aurora :</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th><span data-lang="en">Component</span><span data-lang="pt">Componente</span><span data-lang="fr">Composant</span></th>
+        <th><span data-lang="en">Role</span><span data-lang="pt">Função</span><span data-lang="fr">Rôle</span></th>
+        <th><span data-lang="en">Terminal</span><span data-lang="pt">Terminal</span><span data-lang="fr">Terminal</span></th>
+        <th><span data-lang="en">Output</span><span data-lang="pt">Saída</span><span data-lang="fr">Sortie</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Aurora IDE</strong></td>
+        <td><span data-lang="en">Graphical environment, project management, orchestration</span><span data-lang="pt">Ambiente gráfico, gerenciamento de projetos, orquestração</span><span data-lang="fr">Environnement graphique, gestion de projets, orchestration</span></td>
+        <td><span style="color:var(--text-muted)">N/A</span></td>
+        <td><span style="color:var(--text-muted)">N/A</span></td>
+      </tr>
+      <tr>
+        <td><code>cmmcomp.exe</code> (YANC)</td>
+        <td><span data-lang="en">C± → Assembly compiler</span><span data-lang="pt">Compilador C± → Assembly</span><span data-lang="fr">Compilateur C± → Assembly</span></td>
+        <td>TCMM</td>
+        <td><code>.asm</code></td>
+      </tr>
+      <tr>
+        <td><code>asmcomp.exe</code> (YANC)</td>
+        <td><span data-lang="en">Assembly → Verilog HDL compiler</span><span data-lang="pt">Compilador Assembly → Verilog HDL</span><span data-lang="fr">Compilateur Assembly → Verilog HDL</span></td>
+        <td>TASM</td>
+        <td><span data-lang="en">HDL files + testbench</span><span data-lang="pt">Arquivos HDL + testbench</span><span data-lang="fr">Fichiers HDL + banc de test</span></td>
+      </tr>
+      <tr>
+        <td><span data-lang="en">Verilog Compiler</span><span data-lang="pt">Compilador Verilog</span><span data-lang="fr">Compilateur Verilog</span></td>
+        <td><span data-lang="en">Compiles HDL source files</span><span data-lang="pt">Compila os arquivos HDL</span><span data-lang="fr">Compile les fichiers HDL source</span></td>
+        <td>TVERI</td>
+        <td><span data-lang="en">Simulation-ready design</span><span data-lang="pt">Design pronto para simulação</span><span data-lang="fr">Design prêt pour simulation</span></td>
+      </tr>
+      <tr>
+        <td>Yosys</td>
+        <td><span data-lang="en">RTL synthesis and module hierarchy generation</span><span data-lang="pt">Síntese RTL e geração de hierarquia de módulos</span><span data-lang="fr">Synthèse RTL et génération de hiérarchie de modules</span></td>
+        <td>TVERI</td>
+        <td><span data-lang="en">Module hierarchy for PRISM</span><span data-lang="pt">Hierarquia de módulos para o PRISM</span><span data-lang="fr">Hiérarchie de modules pour PRISM</span></td>
+      </tr>
+      <tr>
+        <td>GTKWave</td>
+        <td><span data-lang="en">Waveform simulation viewer</span><span data-lang="pt">Visualizador de formas de onda</span><span data-lang="fr">Visualiseur de formes d'onde</span></td>
+        <td>TWAVE</td>
+        <td><span data-lang="en">Interactive waveform display</span><span data-lang="pt">Exibição interativa de formas de onda</span><span data-lang="fr">Affichage interactif des formes d'onde</span></td>
+      </tr>
+      <tr>
+        <td>PRISM RTL Viewer</td>
+        <td><span data-lang="en">RTL schematic diagram viewer</span><span data-lang="pt">Visualizador de diagrama esquemático RTL</span><span data-lang="fr">Visualiseur de schéma RTL</span></td>
+        <td><span style="color:var(--text-muted)">N/A</span></td>
+        <td><span data-lang="en">Visual processor schematic</span><span data-lang="pt">Esquemático visual do processador</span><span data-lang="fr">Schéma visuel du processeur</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h2 id="project-structure">
+    <span data-lang="en">1.4 Project Structure</span>
+    <span data-lang="pt">1.4 Estrutura do Projeto</span>
+    <span data-lang="fr">1.4 Structure du projet</span>
+  </h2>
+
+  <p data-lang="en">
+    Every Aurora project is organized into a fixed folder hierarchy that mirrors the stages of the compilation pipeline. When a new project is created, Aurora generates this structure automatically:
+  </p>
+  <p data-lang="pt">
+    Todo projeto Aurora é organizado em uma hierarquia de pastas fixa que espelha os estágios do pipeline de compilação. Quando um novo projeto é criado, o Aurora gera essa estrutura automaticamente:
+  </p>
+  <p data-lang="fr">
+    Chaque projet Aurora est organisé en une hiérarchie de dossiers fixe qui reflète les étapes du pipeline de compilation. Lors de la création d'un nouveau projet, Aurora génère automatiquement cette structure :
+  </p>
+
+<pre><span class="comment">ProjectName/</span>
+<span class="comment">└── processorName/</span>
+    ├── <span class="keyword">Hardware/</span>       <span class="comment">← Generated Verilog HDL files (core.v, ula.v, …)</span>
+    ├── <span class="keyword">Simulation/</span>     <span class="comment">← Testbench files (procName_tb.v) and .vcd waveforms</span>
+    └── <span class="keyword">Software/</span>       <span class="comment">← User-written source files</span>
+        ├── procName.cmm  <span class="comment">← C± source code (edit this)</span>
+        └── procName.asm  <span class="comment">← Assembly output (generated, do not edit)</span></pre>
+
+  <p data-lang="en">
+    The <code>Software/</code> folder is where active development takes place. The <code>.cmm</code> file is the only file users are expected to edit directly. Files in <code>Hardware/</code> and <code>Simulation/</code> are fully managed by the toolchain and are regenerated on every Full Build.
+  </p>
+  <p data-lang="pt">
+    A pasta <code>Software/</code> é onde o desenvolvimento ativo ocorre. O arquivo <code>.cmm</code> é o único que os usuários devem editar diretamente. Os arquivos em <code>Hardware/</code> e <code>Simulation/</code> são totalmente gerenciados pelo toolchain e são regenerados a cada Full Build.
+  </p>
+  <p data-lang="fr">
+    Le dossier <code>Software/</code> est l'espace de développement actif. Le fichier <code>.cmm</code> est le seul fichier que les utilisateurs sont censés modifier directement. Les fichiers dans <code>Hardware/</code> et <code>Simulation/</code> sont entièrement gérés par la chaîne d'outils et sont régénérés à chaque Full Build.
+  </p>
+
+  <div class="tip">
+    <div class="tip-label" data-lang="en">Tip</div>
+    <div class="tip-label" data-lang="pt">Dica</div>
+    <div class="tip-label" data-lang="fr">Conseil</div>
+    <span data-lang="en">The File Tree panel on the left side of the Aurora interface reflects this exact folder structure. Clicking on any file in the tree opens it in the editor. The currently active <code>.cmm</code> file is highlighted in the tree and shown in the status bar at the bottom of the window.</span>
+    <span data-lang="pt">O painel File Tree no lado esquerdo da interface Aurora reflete exatamente essa estrutura de pastas. Clicar em qualquer arquivo na árvore o abre no editor. O arquivo <code>.cmm</code> ativo no momento está destacado na árvore e exibido na barra de status na parte inferior da janela.</span>
+    <span data-lang="fr">Le panneau File Tree sur le côté gauche de l'interface Aurora reflète exactement cette structure de dossiers. Cliquer sur n'importe quel fichier dans l'arborescence l'ouvre dans l'éditeur. Le fichier <code>.cmm</code> actif est mis en évidence dans l'arborescence et affiché dans la barre d'état en bas de la fenêtre.</span>
+  </div>
+
+  <div class="page-nav">
+    <a href="#">
+      <span class="nav-dir" data-lang="en">← Previous</span>
+      <span class="nav-dir" data-lang="pt">← Anterior</span>
+      <span class="nav-dir" data-lang="fr">← Précédent</span>
+      <span class="nav-title" data-lang="en">Table of Contents</span>
+      <span class="nav-title" data-lang="pt">Índice</span>
+      <span class="nav-title" data-lang="fr">Table des matières</span>
+    </a>
+    <a href="#" class="next">
+      <span class="nav-dir" data-lang="en">Next →</span>
+      <span class="nav-dir" data-lang="pt">Próximo →</span>
+      <span class="nav-dir" data-lang="fr">Suivant →</span>
+      <span class="nav-title" data-lang="en">Chapter 2: Installation</span>
+      <span class="nav-title" data-lang="pt">Capítulo 2: Instalação</span>
+      <span class="nav-title" data-lang="fr">Chapitre 2 : Installation</span>
+    </a>
+  </div>
+
+</main>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
